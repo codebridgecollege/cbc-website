@@ -77,6 +77,16 @@ To save your changes:
 
    ![Push file changes](./docs/github-codespaces-git-push.png)
 
+4. Verify the website has been updated
+
+   After "syncing changes", you automatically trigger the live website to re-build.
+
+   After all is done, the website should be live at https://codebridgecollege.github.io/cbc-website/.
+
+   You can see the progress in the ["Actions" tab](https://github.com/codebridgecollege/cbc-website/actions) of the project.
+
+   ![Github Actions deploy website](./docs/github-actions.png)
+
 ### Adding, removing or modifying pages
 
 All webpages that you can see on the website are defined in [`src/app`](./src/app/).
