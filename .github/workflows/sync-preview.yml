@@ -11,20 +11,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Check token
+      - name: Prepare clean copy
         run: |
-          if [ -z "${REPO_SYNC_TOKEN}" ]; then
-            echo "::error::REPO_SYNC_TOKEN is empty or not set"
-            exit 1
-          fi
-          echo "Token is set (length: ${#REPO_SYNC_TOKEN})"
-        env:
-          REPO_SYNC_TOKEN: ${{ secrets.REPO_SYNC_TOKEN }}
+          rsync -av --exclude='.git' . ../repo-sync/
+          mv ../repo-sync ./repo-sync
 
       - name: Push to preview repo
-        run: |
-          TOKEN=$(printf '%s' "$REPO_SYNC_TOKEN" | tr -d '\n\r\t ')
-          git config --global credential.helper ""
-          git push "https://x-access-token:${TOKEN}@github.com/codebridgecollege/cbc-website--preview.git" dev:main --force
+        uses: cpina/github-action-push-to-another-repository@main
         env:
-          REPO_SYNC_TOKEN: ${{ secrets.REPO_SYNC_TOKEN }}
+          API_TOKEN_GITHUB: ${{ secrets.REPO_SYNC_TOKEN }}
+        with:
+          source-directory: 'repo-sync'
+          destination-github-username: codebridgecollege
+          destination-repository-name: cbc-website--preview
+          user-email: 'github-actions[bot]@users.noreply.github.com'
+          target-branch: main
+          create-target-branch-if-needed: true
