@@ -1,0 +1,19 @@
+name: Sync to preview repo
+
+on:
+  push:
+    branches: [dev]
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Push to preview repo
+        run: |
+          git remote add preview "https://x-access-token:${REPO_SYNC_TOKEN}@github.com/codebridgecollege/cbc-website--preview.git"
+          git push preview dev:main --force
+        env:
+          REPO_SYNC_TOKEN: ${{ secrets.REPO_SYNC_TOKEN }}

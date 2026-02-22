@@ -32,13 +32,12 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          # URL path prefix for the website where this project is hosted
-          # When using Github pages without custom domain, the project
-          # is hosted at https://<github-username>.github.io/<project-name>
-          # In this case, the BASE_PATH is /<project-name>
+          # URL path prefix for the website where this project is hosted.
+          # Preview repo (cbc-website--preview) → /cbc-website--preview
+          # Main repo → /cbc-website (or empty string if using custom domain)
           #
-          # Once the website is hosted on a custom domain, set BASE_PATH to empty string
-          BASE_PATH: /cbc-website
+          # TODO: Once the website is hosted on a custom domain, set BASE_PATH to empty string for prod
+          BASE_PATH: ${{ github.repository == 'codebridgecollege/cbc-website--preview' && '/cbc-website--preview' || '/cbc-website' }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
