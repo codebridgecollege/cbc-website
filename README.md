@@ -1,7 +1,7 @@
 # CodeBridge College
 
-- [Preview](https://codebridgecollege.github.io/cbc-website--preview/) — staging site (from `dev` branch)
-- [Publish](https://github.com/codebridgecollege/cbc-website/compare/main...dev?expand=1) — create PR to merge `dev` → `main`
+- [Preview site](https://codebridgecollege.github.io/cbc-website--preview/) — staging site (from `dev` branch)
+- [Click here to publish](https://github.com/codebridgecollege/cbc-website/compare/main...dev?expand=1) — create PR to merge `dev` → `main`
 
 Edit links:
 
